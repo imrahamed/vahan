@@ -1,1 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
+.ant-tabs-bar {
+    margin: 0;
+}
+#headinWrapper .ant-tabs-nav {
+    width: 100%;
+}
+#headinWrapper .ant-tabs-tab {
+    width: 25%;
+    color: #bbbfc3;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-right: 2rem;
+}
+
+#headinWrapper .ant-tabs-tab {
+    width: 22%;
+    color: #bbbfc3;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-align: center;
+}
+#headinWrapper .ant-tabs-tab-active {
+    color: #eebb25;
+}
+.ant-tabs-ink-bar {
+    background-color: #eebb25;
+}
+.ant-tabs-content {
+    height: calc(100vh - (220px));
+    background-image: url("https://jobs.vahan.co/static/media/chatBG_cropped_min.53ac0bc8.jpg");
+    overflow-y: auto;
+}
+
+:root .ant-tabs-tab-next-icon-target, :root .ant-tabs-tab-prev-icon-target {
+    font-size: 1.3rem;
+    color: #fff;
+}
+.ant-tabs-tabpane.ant-tabs-tabpane-active {
+    background-image: url(https://jobs.vahan.co/static/media/chatBG_cropped_min.53ac0bc8.jpg)!important;
+}
+
+.ant-tabs-nav .ant-tabs-tab .anticon{
+    margin-right: 0;
+}
