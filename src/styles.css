@@ -27,7 +27,7 @@
     background-color: #eebb25;
 }
 .ant-tabs-content {
-    height: calc(100vh - (220px));
+    height: calc(100vh - (230px));
     background-image: url("https://jobs.vahan.co/static/media/chatBG_cropped_min.53ac0bc8.jpg");
     overflow-y: auto;
 }

@@ -31,9 +31,12 @@ export class DataService {
    */
   scrollToBottom() {
     setTimeout(() => {
-      document.getElementsByClassName('ant-tabs-content')[0].scrollTo
-      (0, document.getElementsByClassName('ant-tabs-content')[0].scrollHeight);
-    }, 1000);
+      const wrapper = document.getElementsByClassName('ant-tabs-content') && document.getElementsByClassName('ant-tabs-content')[0];
+      if (wrapper) {
+        wrapper.scrollTo
+        (0, wrapper.scrollHeight);
+      }
+    }, 500);
   }
 /**
  * 

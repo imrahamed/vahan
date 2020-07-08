@@ -1,6 +1,9 @@
 <!-- <div class="message received">
     What happened last night?
 </div> -->
-<div [ngClass]="{sent: type==='sent', received: type==='received'}" class="message">
-    {{content}}
+<div>
+    <div [ngClass]="{sent: type==='sent', received: type==='received'}" class="message">
+        {{content}}
+    </div>
+    <p class="dummy"></p>
 </div>
