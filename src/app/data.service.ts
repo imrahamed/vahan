@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, Observer, fromEvent, merge, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NzMessageService } from 'ng-zorro-antd';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 export class DataService {
   private dataSource = new BehaviorSubject<Array<any>>([]);
   data = this.dataSource.asObservable();
-  constructor(private message: NzMessageService) {
+  constructor(private message: NzMessageService, private http: HttpClient) {
   }
   /**
    * Function to check internet status
@@ -34,18 +36,19 @@ export class DataService {
       const wrapper = document.getElementsByClassName('ant-tabs-content') && document.getElementsByClassName('ant-tabs-content')[0];
       if (wrapper) {
         wrapper.scrollTo
-        (0, wrapper.scrollHeight);
+          (0, wrapper.scrollHeight);
       }
     }, 500);
   }
-/**
- * 
- * @param entry new value for msgList
- * function to update msg list
- */
+  /**
+   *
+   * @param entry new value for msgList
+   * function to update msg list
+   */
   changeData(entry: any) {
     this.dataSource.next(entry);
     localStorage.setItem('msgList', JSON.stringify(entry));
+    this.scrollToBottom();
   }
   /**
    * 
@@ -54,14 +57,26 @@ export class DataService {
    */
   addMsg(content: string, type: string) {
     const currentMsg = this.dataSource.getValue();
-    currentMsg.push({content, type});
+    currentMsg.push({ content, type });
     this.changeData(currentMsg);
     if (type === 'sent') {
-      setTimeout(() => {
-        this.addMsg('Pardon my ignorance. I am just a dummy.', 'received');
-      }, 1000);
+      this.getResponse().then(({msg, msgType}) =>{
+        this.addMsg(msg, msgType);
+      }).catch(err => console.error(err));
     }
-    this.scrollToBottom();
+  }
+
+  getResponse() {
+    return new Promise((resolve, reject) => {
+      this.http.get(environment.api_url).subscribe((response) => {
+        console.log(response);
+        resolve(response);
+      },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
   }
 
 }
